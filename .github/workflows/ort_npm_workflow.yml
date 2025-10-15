@@ -56,15 +56,13 @@ jobs:
         rm -rf ort-results
         mkdir -p ort-results
         
-    - name: Create ORT configuration
+    - name: Create ORT configuration to disable Bower
       run: |
-        mkdir -p .ort
-        cat > .ort.yml << 'EOF'
-        excludes:
-          paths:
-          - pattern: "**/bower.json"
-            reason: "BUILD_TOOL_OF"
-            comment: "Bower is deprecated and not needed for analysis"
+        mkdir -p $HOME/.ort/config
+        cat > $HOME/.ort/config/config.yml << 'EOF'
+        analyzer:
+          disabled_package_managers:
+            - Bower
         EOF
         
     - name: Run ORT Analyzer
