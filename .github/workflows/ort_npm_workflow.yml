@@ -60,8 +60,7 @@ jobs:
       run: |
         ort analyze \
           -i . \
-          -o ort-results/analyzer \
-          --package-managers NPM
+          -o ort-results/analyzer
           
     - name: Run ORT Advisor
       run: |
