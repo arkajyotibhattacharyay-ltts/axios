@@ -56,6 +56,17 @@ jobs:
         rm -rf ort-results
         mkdir -p ort-results
         
+    - name: Create ORT configuration
+      run: |
+        mkdir -p .ort
+        cat > .ort.yml << 'EOF'
+        excludes:
+          paths:
+          - pattern: "**/bower.json"
+            reason: "BUILD_TOOL_OF"
+            comment: "Bower is deprecated and not needed for analysis"
+        EOF
+        
     - name: Run ORT Analyzer
       run: |
         ort analyze \
